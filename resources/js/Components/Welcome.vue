@@ -10,7 +10,7 @@ import ApplicationLogo from '@/Components/ApplicationLogo.vue';
             </div>
 
             <div class="mt-8 text-2xl">
-                Welcome to your Mobli!
+                Welcome to Mobli!
             </div>
 
             <div class="mt-6 text-gray-500">
@@ -39,7 +39,7 @@ import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 
                 <div class="ml-12">
                     <div class="mt-2 text-sm text-gray-500">
-                        Laravel Jetstream is built with Tailwind, an amazing utility first CSS framework that doesn't get in your way. You'll be amazed how easily you can build and maintain fresh, modern designs with this wonderful framework at your fingertips.
+                        Mobli is built with Tailwind, an amazing utility first CSS framework that doesn't get in your way. You'll be amazed how easily you can build and maintain fresh, modern designs with this wonderful framework at your fingertips.
                     </div>
                 </div>
             </div>
@@ -62,7 +62,7 @@ import ApplicationLogo from '@/Components/ApplicationLogo.vue';
 
                 <div class="ml-12">
                     <div class="mt-2 text-sm text-gray-500">
-                        Authentication and registration views are included with Laravel Jetstream, as well as support for user email verification and resetting forgotten passwords. So, you're free to get started what matters most: building your application.
+                        Authentication and registration views are included with Mobli, as well as support for user email verification and resetting forgotten passwords. So, you're free to get started what matters most: building your application.
                     </div>
                 </div>
             </div>
