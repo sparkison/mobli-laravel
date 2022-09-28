@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Middleware;
 
@@ -36,8 +37,27 @@ class HandleInertiaRequests extends Middleware
      */
     public function share(Request $request): array
     {
+        // Get impersonation manager
+        $manager = app('impersonate');
+
+        /** @var User $user */
+        $user = auth()->user();
+
         return array_merge(parent::share($request), [
-            //
+            // Redirect flash messages
+            'flash' => [
+                'error' => fn() => $request->session()->get('error'),
+                'success' => fn() => $request->session()->get('success')
+            ],
+
+            // Share the app name globally
+            'appName' => config('app.name'),
+
+            // Pass user admin status
+            'isAdmin' => $user->is_admin ?? false,
+
+            // Is user currently impersonating another user?
+            'isImpersonating' => $manager->isImpersonating(),
         ]);
     }
 }
