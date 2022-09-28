@@ -5,6 +5,15 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 /*
+ |---------------------------------------------------------------------------
+ | Vendor routes
+ | --------------------------------------------------------------------------
+ */
+
+// Info: https://github.com/404labfr/laravel-impersonate#using-the-built-in-controller
+Route::impersonate();
+
+/*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
@@ -32,4 +41,24 @@ Route::middleware([
     Route::get('/dashboard', function () {
         return Inertia::render('Dashboard');
     })->name('dashboard');
+});
+
+/*
+ |---------------------------------------------------------------------------
+ | Admin routes
+ | --------------------------------------------------------------------------
+ */
+Route::group([
+    'middleware' => [
+        'auth:sanctum',
+        'verified',
+        'admin'
+    ]
+], function() {
+    // User CRUD routes
+    Route::resource('user', \App\Http\Controllers\UserController::class);
+
+    // Mail template CRUD routes
+    Route::resource('notifications', \App\Http\Controllers\MailTemplateController::class)
+        ->except('create', 'destroy');
 });
