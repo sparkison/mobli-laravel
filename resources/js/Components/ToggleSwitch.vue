@@ -23,11 +23,11 @@ const toggle = () => {
                 @click="toggle"
                 :aria-pressed="toggled"
                 :class="{
-                    'bg-indigo-600': toggled,
+                    'bg-primary-600': toggled,
                     'bg-gray-300': !toggled,
                     'cursor-not-allowed': disabled
                 }"
-                class="mt-1 bg-gray-200 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50">
+                class="mt-1 bg-gray-200 relative inline-flex flex-shrink-0 h-6 w-11 border-2 border-transparent rounded-full cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus:border-primary-300 focus:ring focus:ring-primary-200 focus:ring-opacity-50">
             <span class="sr-only">{{ name || 'Toggle' }}</span>
             <span aria-hidden="true"
                   :class="{

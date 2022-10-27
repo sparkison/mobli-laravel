@@ -10,7 +10,9 @@ use Faker\Factory;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
 use Inertia\Inertia;
+use ProtoneMedia\LaravelQueryBuilderInertiaJs\InertiaTable;
 use Spatie\MailTemplates\Models\MailTemplate;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class MailTemplateController extends Controller
 {
@@ -21,25 +23,24 @@ class MailTemplateController extends Controller
      */
     public function index()
     {
+        // Build the query
+        $models = QueryBuilder::for(MailTemplate::class)
+            ->defaultSort('name')
+            ->paginate()
+            ->withQueryString();
+
+        // Render the view
         return Inertia::render('MailTemplates/Index', [
-            'templates' => MailTemplate::query()
-                ->orderBy('name')
-                ->orderBy('mailable')
-                ->paginate()
-                ->through(function($template) {
-                    return [
-                        'id' => $template->id,
-                        'name' => $template->name ?? explode('\\', $template->mailable)[2],
-                        'info' => $template->info,
-                        'subject' => $template->subject,
-                        'html_template' => $template->html_template,
-                        'text_template' => $template->text_template,
-                        'edit_url' => URL::route('notifications.edit', $template),
-                        'preview_url' => URL::route('notifications.show', $template),
-                        'variables' => $template->getVariables()
-                    ];
-                }),
-        ]);
+            'models' => $models,
+            'sortable' => []
+        ])->table(function(InertiaTable $table) {
+            $table
+                ->defaultSort('name')
+                ->column(label: 'Actions', canBeHidden: false)
+                ->column(key: 'name', searchable: false, sortable: true, canBeHidden: false)
+                ->column(key: 'subject', searchable: false, sortable: true, canBeHidden: false)
+                ->column(key: 'info', canBeHidden: false);
+        });
     }
 
     /**

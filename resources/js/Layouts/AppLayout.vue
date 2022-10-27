@@ -52,6 +52,14 @@ const logout = () => {
                                 <NavLink :href="route('dashboard')" :active="route().current('dashboard')">
                                     Dashboard
                                 </NavLink>
+                                <template v-if="$page.props.isAdmin">
+                                    <NavLink :href="route('user.index')" :active="route().current('user.*')">
+                                        Users
+                                    </NavLink>
+                                    <NavLink :href="route('notifications.index')" :active="route().current('notifications.*')">
+                                        Mail Templates
+                                    </NavLink>
+                                </template>
                             </div>
                         </div>
 

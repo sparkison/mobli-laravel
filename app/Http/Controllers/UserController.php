@@ -203,23 +203,6 @@ class UserController extends Controller
     }
 
     /**
-     * @param int $length
-     * @return string
-     * @throws \Exception
-     */
-    protected function randomPassword($length = 10)
-    {
-        $alphabet = 'abcdefghijklmnopqrstuvwxyz=*+.&%$#@!ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
-        $pass = []; //remember to declare $pass as an array
-        $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
-        for ($i = 0; $i < $length; $i++) {
-            $n = random_int(0, $alphaLength);
-            $pass[] = $alphabet[$n];
-        }
-        return implode($pass); //turn the array into a string
-    }
-
-    /**
      * @param User $user
      * @return array[]
      */
@@ -236,5 +219,22 @@ class UserController extends Controller
                 'impersonate_url' => URL::route('impersonate', $user),
             ]
         ];
+    }
+
+    /**
+     * @param int $length
+     * @return string
+     * @throws \Exception
+     */
+    protected function randomPassword($length = 10)
+    {
+        $alphabet = 'abcdefghijklmnopqrstuvwxyz=*+.&%$#@!ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+        $pass = []; //remember to declare $pass as an array
+        $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+        for ($i = 0; $i < $length; $i++) {
+            $n = random_int(0, $alphaLength);
+            $pass[] = $alphabet[$n];
+        }
+        return implode($pass); //turn the array into a string
     }
 }

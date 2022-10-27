@@ -1,10 +1,10 @@
 <script setup>
 import { Link } from '@inertiajs/inertia-vue3';
-import Dropdown from '@/Jetstream/Dropdown.vue'
-import DropdownLink from '@/Jetstream/DropdownLink.vue'
+import Dropdown from '@/Components/Dropdown.vue'
+import DropdownLink from '@/Components/DropdownLink.vue'
 import {defineProps, ref} from 'vue'
 
-const props = defineProps({
+defineProps({
     actions: Array
 })
 
